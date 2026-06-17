@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor de Divisas · Tasas en vivo</title>
+<meta name="description" content="Convierte entre más de 30 divisas con tasas de cambio en tiempo real.">
+
+<!-- Tipografías -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<main class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="hero">
+    <p class="eyebrow">
+      <span class="dot" id="status-dot" aria-hidden="true"></span>
+      <span id="status-text">Conectando con el mercado…</span>
+    </p>
+    <h1 class="title">Conversor<br><em>de Divisas</em></h1>
+    <p class="subtitle">Tasas reales, actualizadas al minuto. Escribe una cantidad, elige tus monedas y observa el tablero girar.</p>
+  </header>
+
+  <!-- ===== TARJETA CONVERSOR ===== -->
+  <section class="card" aria-labelledby="form-title">
+    <h2 id="form-title" class="visually-hidden">Formulario de conversión</h2>
+
+    <form id="converter-form" novalidate>
+
+      <div class="field">
+        <label for="amount">Cantidad</label>
+        <input
+          type="text"
+          id="amount"
+          name="amount"
+          inputmode="decimal"
+          placeholder="0.00"
+          autocomplete="off"
+        >
+        <p class="error-msg" id="amount-error" role="alert"></p>
+      </div>
+
+      <div class="row-currencies">
+        <div class="field">
+          <label for="from-currency">De</label>
+          <select id="from-currency" name="from" disabled>
+            <option>Cargando…</option>
+          </select>
+        </div>
+
+        <button type="button" id="swap-btn" class="swap-btn" aria-label="Intercambiar monedas" title="Intercambiar monedas">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V4M7 4L3 8M7 4l4 4"/>
+            <path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+          </svg>
+        </button>
+
+        <div class="field">
+          <label for="to-currency">A</label>
+          <select id="to-currency" name="to" disabled>
+            <option>Cargando…</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="error-msg" id="form-error" role="alert"></p>
+
+      <button type="submit" class="convert-btn" id="convert-btn">
+        <span class="btn-label">Convertir</span>
+      </button>
+    </form>
+
+    <!-- ===== RESULTADO / TABLERO DIVIDIDO (SIGNATURE) ===== -->
+    <div class="result" id="result-panel" aria-live="polite">
+      <div class="flipboard" id="flipboard">
+        <!-- Las tarjetas se generan dinámicamente con JS -->
+      </div>
+      <div class="result-currency" id="result-currency">&nbsp;</div>
+      <p class="rate-line" id="rate-line">&nbsp;</p>
+    </div>
+  </section>
+
+  <!-- ===== HISTORIAL ===== -->
+  <section class="history" aria-labelledby="history-title">
+    <div class="history-head">
+      <h2 id="history-title">Historial de conversiones</h2>
+      <button type="button" id="clear-history" class="text-btn">Limpiar</button>
+    </div>
+    <ul class="history-list" id="history-list">
+      <li class="history-empty" id="history-empty">Tus conversiones aparecerán aquí.</li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    <p>Datos de tasas de cambio cortesía de <a href="https://www.exchangerate-api.com/" target="_blank" rel="noopener">ExchangeRate-API</a>. Actividad académica individual — sin fines comerciales.</p>
+    <p id="last-updated">&nbsp;</p>
+  </footer>
+
+</main>
+
+<script src="js/script.js"></script>
+</body>
+</html>
